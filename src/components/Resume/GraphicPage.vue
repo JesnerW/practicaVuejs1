@@ -22,9 +22,9 @@
         stroke="#c4c4c4"
         stroke-width="2"
         x1="0"
-        :y1="zero"
+        :y1="zero || 0"
         x2="300"
-        :y2="zero"
+        :y2="zero || 0"
       />
       <polyline
         fill="none"
@@ -36,9 +36,9 @@
         v-show="showPointer"
         stroke="#04b500"
         stroke-width="2"
-        :x1="pointer"
+        :x1="pointer || 0"
         y1="0"
-        :x2="pointer"
+        :x2="pointer || 0"
         y2="200"
       />
     </svg>
@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import { toRefs, defineProps, /*defineEmits,*/ computed, ref } from "vue";
+import { toRefs, defineProps, watch, defineEmits, computed, ref } from "vue";
 
 const props = defineProps({
   amounts: {
@@ -74,17 +74,26 @@ const zero = computed(() => {
 
 const points = computed(() => {
   const total = amounts.value.length;
-  return amounts.value.reduce((points, amount, i) => {
-    const x = (300 / total) * (i + 1);
-    const y = amountToPixels(amount);
-    return `${points} ${x},${y}`;
-  }, "0, 100");
+  if (total > 0) {
+    return amounts.value.reduce((points, amount, i) => {
+      const x = (300 / total) * (i + 1);
+      const y = amountToPixels(amount);
+      return `${points} ${x},${y}`;
+    }, `0, ${amountToPixels(amounts.value.length ? amounts.value[0] : 0)}`);
+  } else {
+    return "0, 0";
+  }
 });
 
 const showPointer = ref(false);
 const pointer = ref(0);
 
-//const emit = defineEmits(["select"]); REVISAR ESTE PUNTO, QUEDO INCONCLUSO
+const emit = defineEmits(["select"]); //REVISAR ESTE PUNTO, QUEDO INCONCLUSO
+watch(pointer, (value) => {
+  const index = Math.ceil(value / (300 / amounts.value.length));
+  if (index < 0 || index > amounts.value.length) return;
+  emit("select", amounts.value[index - 1]);
+});
 
 const tap = ({ target, touches }) => {
   showPointer.value = true;

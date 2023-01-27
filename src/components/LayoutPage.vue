@@ -32,7 +32,7 @@ const showMovements = ref(false);
 }
 .header {
   position: fixed;
-  width: 100vw;
+  width: 50vw;
 }
 .resume {
   min-height: 100vh;
@@ -42,7 +42,7 @@ const showMovements = ref(false);
   position: absolute;
   flex-direction: column;
   bottom: 0;
-  width: 100vw;
+  width: 50vw;
   background-color: white;
   box-shadow: 0 -8px 16px #e5e5e5;
   border-radius: 24px;
@@ -64,5 +64,10 @@ const showMovements = ref(false);
   height: 8px;
   background-color: #e5e5e5;
   border-radius: 4px;
+}
+@media (max-width: 700px) {
+  .movements {
+    width: 100vw;
+  }
 }
 </style>

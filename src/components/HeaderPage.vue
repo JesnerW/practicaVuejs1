@@ -21,7 +21,7 @@ header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 100vw;
+  width: 50vw;
 }
 img,
 span {
@@ -33,5 +33,10 @@ h1 {
 }
 h1 span {
   color: var(--brand-green);
+}
+@media (max-width: 700px) {
+  header {
+    width: 100vw;
+  }
 }
 </style>

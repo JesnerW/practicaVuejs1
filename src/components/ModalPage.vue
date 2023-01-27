@@ -27,6 +27,8 @@ const close = () => emit("close");
   top: 0;
   bottom: 0;
   background-color: white;
+  width: 50vw;
+  margin: 0 auto;
 }
 
 .head {
@@ -42,5 +44,10 @@ p {
   margin: 0;
   font-size: 1.5rem;
   color: var(--brand-blue);
+}
+@media (max-width: 700px) {
+  .modal {
+    width: 100vw;
+  }
 }
 </style>

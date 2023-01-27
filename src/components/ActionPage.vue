@@ -55,6 +55,10 @@ const submit = () => {
     time: new Date(),
     id: new Date().getTime(),
   });
+  title.value = "";
+  description.value = "";
+  amount.value = 0;
+  movementType.value = "Ingreso";
 };
 </script>
 
@@ -72,7 +76,8 @@ button {
 
 form {
   font-size: 1.24rem;
-  width: 100%;
+  width: 50vw;
+  margin: 0 auto;
 }
 
 form .action {
@@ -124,5 +129,10 @@ input[type="radio"] {
 
 input[type="radio"]:checked {
   background-color: var(--brand-blue);
+}
+@media (max-width: 700px) {
+  form {
+    width: 100vw;
+  }
 }
 </style>

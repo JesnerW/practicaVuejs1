@@ -20,7 +20,7 @@ export default {
         new Promise((resolve) => {
           setTimeout(() => {
             resolve(import("./components/HomePage.vue"));
-          }, 5500);
+          }, 1000);
         })
     ),
   },
@@ -28,15 +28,22 @@ export default {
 </script>
 
 <style>
-html,
-body,
+body {
+  width: 50vw;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
 .app {
   min-height: 100vh;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
 }
 * {
   --brand-green: #04b500;
   --brand-blue: #0689b0;
+}
+@media (max-width: 700px) {
+  body {
+    width: 100vw;
+  }
 }
 </style>
